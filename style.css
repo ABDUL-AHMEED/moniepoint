@@ -100,6 +100,7 @@ footer{
     color: #0066ff;
     font-weight: bold;
     text-decoration: none;
+}
 /* DASHBOARD FEATURES */
 .features{
     display: flex;
@@ -111,14 +112,11 @@ footer{
 .card{
     background: white;
     width: 260px;
-    padding: 20px;
+    padding: 25px;
     border-radius: 10px;
     text-align: center;
     box-shadow: 0 3px 10px rgba(0,0,0,0.15);
-    height: auto;         /* shrink to content */
-    min-height: 160px;    /* minimum nice size */
 }
-
 
 .card h3{
     margin-bottom: 10px;
@@ -231,77 +229,3 @@ footer{
     border: 1px solid #ccc;
     margin-right: 10px;
 }
-
-/* WhatsApp Button */
-.whatsapp-float{
-    position: fixed;
-    width: 60px;
-    height: 60px;
-    bottom: 20px;
-    right: 20px;
-    background-color: #25D366;
-    color: white;
-    border-radius: 50px;
-    text-align: center;
-    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-.whatsapp-float img{
-    width: 45px;
-}
-}
-/* DASHBOARD FEATURES */
-.features{
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 20px;
-    align-items: flex-start; /* prevent stretch */
-}
-
-.dashboard-layout{
-    display: grid;
-    grid-template-columns: 250px 1fr 250px;
-    gap: 20px;
-    padding: 30px 20px;
-    align-items: flex-start;
-}
-
-.center-content{
-    width: 100%;
-}
-.dashboard-layout{
-    display: grid;
-    grid-template-columns: 250px 1fr 250px;
-    gap: 20px;
-    padding: 30px;
-}
-
-.center-content{
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.chat-input{
-    display: flex;
-    gap: 10px;
-}
-
-.card{
-    height: auto;
-    min-height: 250px;
-}
-
-.side-left, .side-right{
-    text-align: center;
-}
-
-.comments-section, .chatbot-section{
-    width: 100%;
-}
-
-
