@@ -172,9 +172,50 @@ sendBtn.addEventListener('click', function(){
 });
 </script>
 
+<script>
+const sendBtn = document.getElementById('sendBtn');
+const userInput = document.getElementById('userInput');
+const chatWindow = document.getElementById('chatWindow');
+
+// Simple AI responses
+function getAIResponse(text){
+    text = text.toLowerCase();
+    if(text.includes("activation")){
+        return "To activate your POS, make sure it's connected to the internet and then follow the activation steps on your device.";
+    } else if(text.includes("repair") || text.includes("issue")){
+        return "For repairs, please contact our support via WhatsApp or drop a comment below.";
+    } else if(text.includes("buy")){
+        return "You can purchase a new POS from your nearest agent or contact support for guidance.";
+    } else {
+        return "Sorry, I don't understand. Please ask a different question or contact support.";
+    }
+}
+
+// Send message
+sendBtn.addEventListener('click', function(){
+    let text = userInput.value.trim();
+    if(text === "") return;
+
+    // Show user message
+    let userDiv = document.createElement('div');
+    userDiv.classList.add('user-msg');
+    userDiv.textContent = text;
+    chatWindow.appendChild(userDiv);
+
+    // AI reply
+    let aiDiv = document.createElement('div');
+    aiDiv.classList.add('ai-msg');
+    aiDiv.textContent = getAIResponse(text);
+    chatWindow.appendChild(aiDiv);
+
+    userInput.value = "";
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+});
+</script>
 
 
 
 </body>
 </html>
+
 
