@@ -3,117 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MoniePoint Agent Dashboard</title>
+    <title>Dashboard - Moniepoint Agent</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<nav class="navbar">
-    <h1 class="logo">MoniePoint Agent Portal</h1>
-    <ul class="nav-links">
-        <li><a href="#">Dashboard</a></li>
-        <li><a href="index.html">Logout</a></li>
-    </ul>
-</nav>
+    <!-- DASHBOARD NAVBAR -->
+    <header>
+        <nav class="navbar">
+            <h2 class="logo">Agent Dashboard</h2>
+            <ul class="nav-links">
+                <li><a href="dashboard.html">Home</a></li>
+                <li><a href="https://wa.me/234********?text=Hello%20I%20need%20POS%20Support" target="_blank">WhatsApp Support</a></li>
+                <li><a href="signin.html">Log Out</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<div class="dashboard-layout">
+    <!-- WELCOME SECTION -->
+    <section class="hero">
+        <h1>Welcome, Agent</h1>
+        <p>Here you can ask questions, request support, or read other agent experiences.</p>
+    </section>
 
-    <!-- LEFT SIDE -->
-    <div class="side-left card">
-        <h3>Ask a Question</h3>
-        <p>Got an issue with your POS? Ask here and get help quickly.</p>
-        <button class="btn" onclick="scrollToChat()">Ask Now</button>
+    <!-- FEATURES SECTION -->
+    <section class="features">
+        <div class="card">
+            <h3>Ask a Question</h3>
+            <p>Got an issue with your POS? Ask here and get help quickly.</p>
+            <a href="#" class="btn">Ask Now</a>
+        </div>
+
+        <!-- COMMENTS / QUESTIONS SECTION -->
+<section class="comments-section">
+    <h2>Agent Questions & Comments</h2>
+
+<!-- AI Chatbot Section -->
+<section class="chatbot-section">
+    <h2>AI Helper</h2>
+    <div id="chatWindow">
+        <!-- Chat messages appear here -->
     </div>
+    <input type="text" id="userInput" placeholder="Ask a question..." />
+    <button id="sendBtn" class="btn">Send</button>
+</section>
 
-    <!-- CENTER CONTENT -->
-    <div class="center-content">
 
-        <!-- CHATBOT SECTION -->
-        <section class="chatbot-section" id="chatSection">
-            <h2>AI Helper</h2>
-            <div id="chatWindow"></div>
-            <div class="chat-input">
-                <input id="userInput" type="text" placeholder="Ask a question...">
-                <button id="sendBtn" class="btn">Send</button>
-            </div>
-        </section>
+    <form id="commentForm">
+        <input type="text" id="commenterName" placeholder="Your Name" required>
+        <textarea id="commentText" placeholder="Type your question or comment..." required></textarea>
+        <button type="submit" class="btn">Post Comment</button>
+    </form>
 
-        <!-- COMMENTS -->
-        <section class="comments-section">
-            <h2>Agent Questions & Comments</h2>
-            <form id="commentForm">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <textarea id="comment" placeholder="Your Comment..." required></textarea>
-                <button type="submit" class="btn">Post</button>
-            </form>
-            <div id="commentsList"></div>
-        </section>
-
+    <div id="commentsList">
+        <!-- Comments will appear here -->
     </div>
+</section>
 
-    <!-- RIGHT SIDE -->
-    <div class="side-right card">
-        <h3>View Comments</h3>
-        <p>Read questions & solutions posted by other agents.</p>
-        <button class="btn" onclick="scrollToComments()">View</button>
 
-        <h3 style="margin-top:25px;">Support & Repairs</h3>
-        <p>Request repair or technical support.</p>
-        <button class="btn">Request</button>
-    </div>
+        <div class="card">
+            <h3>View Comments</h3>
+            <p>Read questions and solutions posted by other agents.</p>
+            <a href="#" class="btn">View</a>
+        </div>
 
-</div>
+        <div class="card">
+            <h3>Support & Repairs</h3>
+            <p>Request repair or technical support.</p>
+            <a href="https://wa.me/234********?text=Hello%20I%20want%20technical%20support" class="btn" target="_blank">Request</a>
+        </div>
+    </section>
 
-<!-- WHATSAPP FLOATING BUTTON -->
-<a class="whatsapp-float" href="https://wa.me/2348137154636" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg">
-</a>
+  <script>
+const commentForm = document.getElementById('commentForm');
+const commentsList = document.getElementById('commentsList');
 
-<script>
-// AI Chat Response
-document.getElementById('sendBtn').addEventListener('click', function(){
-    const input = document.getElementById('userInput');
-    if(input.value.trim()==="") return;
+// Load comments from localStorage on page load
+let comments = JSON.parse(localStorage.getItem('comments')) || [];
+renderComments();
 
-    const chatWindow = document.getElementById('chatWindow');
+// Add new comment
+commentForm.addEventListener('submit', function(event){
+    event.preventDefault();
 
-    chatWindow.innerHTML += `<div class="user-msg">${input.value}</div>`;
+    let name = document.getElementById('commenterName').value;
+    let text = document.getElementById('commentText').value;
 
-    setTimeout(() => {
-        chatWindow.innerHTML += `<div class="ai-msg">Thank you! We will review and assist shortly.</div>`;
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-    }, 800);
+    if(name === "" || text === ""){
+        alert("Please fill in both fields");
+        return;
+    }
 
-    input.value = "";
+    let newComment = {name: name, text: text};
+    comments.push(newComment);
+
+    // Save to localStorage
+    localStorage.setItem('comments', JSON.stringify(comments));
+
+    // Clear form
+    commentForm.reset();
+
+    renderComments();
 });
 
-// Post comment
-document.getElementById('commentForm').addEventListener('submit', function(e){
-    e.preventDefault();
+// Render comments & add delete functionality
+function renderComments(){
+    commentsList.innerHTML = '';
+    comments.forEach(function(comment, index){
+        const div = document.createElement('div');
+        div.classList.add('comment-card');
+        div.innerHTML = `
+            <h4>${comment.name}</h4>
+            <p>${comment.text}</p>
+            <button class="delete-btn" data-index="${index}">Delete</button>
+        `;
+        commentsList.appendChild(div);
+    });
 
-    const name = document.getElementById('name').value;
-    const comment = document.getElementById('comment').value;
-
-    const commentBox = document.createElement('div');
-    commentBox.classList.add('comment-card');
-    commentBox.innerHTML = `
-        <h4>${name}</h4>
-        <p>${comment}</p>
-        <button class="delete-btn" onclick="this.parentElement.remove()">Delete</button>
-    `;
-
-    document.getElementById('commentsList').appendChild(commentBox);
-
-    this.reset();
-});
-
-function scrollToChat(){
-    document.getElementById("chatSection").scrollIntoView({behavior:"smooth"});
-}
-function scrollToComments(){
-    document.querySelector(".comments-section").scrollIntoView({behavior:"smooth"});
+    // Delete comment
+    document.querySelectorAll('.delete-btn').forEach(function(btn){
+        btn.addEventListener('click', function(){
+            let idx = this.getAttribute('data-index');
+            comments.splice(idx, 1); // remove from array
+            localStorage.setItem('comments', JSON.stringify(comments)); // update storage
+            renderComments(); // re-render comments
+        });
+    });
 }
 </script>
+
+
 
 </body>
 </html>
