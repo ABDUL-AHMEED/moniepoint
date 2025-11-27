@@ -100,14 +100,12 @@ footer{
     color: #0066ff;
     font-weight: bold;
     text-decoration: none;
-}
 /* DASHBOARD FEATURES */
 .features{
     display: flex;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
-    align-items: flex-start; /* prevent stretch */
+    padding: 40px 20px;
 }
 
 .card{
@@ -253,5 +251,14 @@ footer{
 }
 .whatsapp-float img{
     width: 45px;
+}
+}
+/* DASHBOARD FEATURES */
+.features{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+    align-items: flex-start; /* prevent stretch */
 }
 
