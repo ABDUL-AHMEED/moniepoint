@@ -262,3 +262,15 @@ footer{
     align-items: flex-start; /* prevent stretch */
 }
 
+.dashboard-layout{
+    display: grid;
+    grid-template-columns: 250px 1fr 250px;
+    gap: 20px;
+    padding: 30px 20px;
+    align-items: flex-start;
+}
+
+.center-content{
+    width: 100%;
+}
+
