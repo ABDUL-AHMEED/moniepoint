@@ -229,3 +229,24 @@ footer{
     border: 1px solid #ccc;
     margin-right: 10px;
 }
+
+/* WhatsApp Button */
+.whatsapp-float{
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 20px;
+    right: 20px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.whatsapp-float img{
+    width: 45px;
+}
