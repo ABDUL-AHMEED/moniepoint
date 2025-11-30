@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <!-- DASHBOARD NAVBAR -->
+    <div class="container">
+        <!-- everything currently inside body goes here -->
+       <!-- DASHBOARD NAVBAR -->
     <header>
         <nav class="navbar">
             <h2 class="logo">Agent Dashboard</h2>
@@ -73,7 +74,7 @@
             <a href="https://wa.me/234********?text=Hello%20I%20want%20technical%20support" class="btn" target="_blank">Request</a>
         </div>
     </section>
-
+  </div>
   <script>
 const commentForm = document.getElementById('commentForm');
 const commentsList = document.getElementById('commentsList');
@@ -137,18 +138,27 @@ const sendBtn = document.getElementById('sendBtn');
 const userInput = document.getElementById('userInput');
 const chatWindow = document.getElementById('chatWindow');
 
-// Simple AI responses
 function getAIResponse(text){
     text = text.toLowerCase();
-    if(text.includes("activation")){
-        return "To activate your POS, make sure it's connected to the internet and then follow the activation steps on your device.";
-    } else if(text.includes("repair") || text.includes("issue")){
-        return "For repairs, please contact our support via WhatsApp or drop a comment below.";
-    } else if(text.includes("buy")){
-        return "You can purchase a new POS from your nearest agent or contact support for guidance.";
-    } else {
-        return "Sorry, I don't understand. Please ask a different question or contact support.";
+
+    const responses = [
+        {keywords: ["activation", "activate", "start pos"], reply: "To activate your Moniepoint POS, connect to strong network and follow the on-screen steps. If activation fails, contact your aggregator."},
+        {keywords: ["repair", "fault", "issue", "problem", "not working"], reply: "Restart the terminal and check network first. If problem continues, request repair using the Support & Repairs button."},
+        {keywords: ["chargeback", "dispute", "money not reversed", "failed transaction"], reply: "Failed or pending transactions are usually reversed within 24 hours automatically. If not, submit a DISPITE request from your Moniepoint app menu."},
+        {keywords: ["buy", "purchase", "get pos", "where can i buy"], reply: "Visit the nearest Moniepoint agent office or contact your aggregator for POS purchase."},
+        {keywords: ["charges", "fee", "how much"], reply: "Transaction charges vary. Log into your Moniepoint app and check the fee section for updated charges."},
+        {keywords: ["withdrawal", "deposit", "transfer"], reply: "Ensure strong network and sufficient balance. If transactions fail, wait for reversal or contact support."},
+        {keywords: ["support", "help"], reply: "Use the WhatsApp support button above or drop a comment below to get assistance."},
+        {keywords: ["hello", "hi"], reply: "Hello Agent! How can I assist you today?"}
+    ];
+
+    for(let item of responses){
+        if(item.keywords.some(word => text.includes(word))){
+            return item.reply;
+        }
     }
+
+    return "🤖 I don't fully understand that yet. Please ask clearly or contact WhatsApp support.";
 }
 
 // Send message
@@ -173,8 +183,9 @@ sendBtn.addEventListener('click', function(){
 });
 </script>
 
-
+  
 </body>
 </html>
+
 
 
