@@ -39,14 +39,21 @@
 <section class="comments-section">
     <h2>Agent Questions & Comments</h2>
 
-<!-- AI Chatbot Section -->
-<section class="chatbot-section">
-    <h2>AI Helper</h2>
-    <div id="chatWindow">
-        <!-- Chat messages appear here -->
+<!-- CUSTOMER SUPPORT WALL -->
+<section class="support-wall">
+    <h2>Customer Support Wall</h2>
+
+    <!-- Form to post a new question -->
+    <form id="postForm">
+        <input type="text" id="posterName" placeholder="Your Name" required>
+        <textarea id="postText" placeholder="Type your question or complaint..." required></textarea>
+        <button type="submit" class="btn">Post</button>
+    </form>
+
+    <!-- Feed of posts -->
+    <div id="postsContainer">
+        <!-- All posts will appear here -->
     </div>
-    <input type="text" id="userInput" placeholder="Ask a question..." />
-    <button id="sendBtn" class="btn">Send</button>
 </section>
 
 
@@ -186,6 +193,7 @@ sendBtn.addEventListener('click', function(){
   
 </body>
 </html>
+
 
 
 
